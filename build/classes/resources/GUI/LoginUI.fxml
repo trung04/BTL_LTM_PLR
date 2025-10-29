@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/8"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="client.GUI.LoginController"
+      alignment="CENTER"
+      spacing="10.0"
+      prefWidth="500"
+      prefHeight="320"
+      style="-fx-background-image: url('/assets/image2.jpg');
+             -fx-background-size: cover;
+             -fx-background-position: center;
+             -fx-background-repeat: no-repeat;">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- Khung trong suốt chứa nội dung đăng nhập -->
+    <VBox spacing="10" alignment="CENTER"
+          style="-fx-background-color: rgba(0, 0, 0, 0.35);
+                 -fx-background-radius: 15;
+                 -fx-padding: 20;
+                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 1, 1);
+                 -fx-max-width: 320;">
+
+        <Label text="♻️ Game Phân Loại Rác ♻️"
+               style="-fx-font-size: 22px;
+                      -fx-font-weight: bold;
+                      -fx-text-fill: #ffffff;
+                      -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 2, 0, 1, 1);"/>
+
+        <Label text="Đăng nhập để bắt đầu trò chơi!"
+               style="-fx-font-size: 13px; -fx-text-fill: #e8f5e9;"/>
+
+        <TextField fx:id="usernameField"
+                   promptText="👤 Tên đăng nhập"
+                   prefWidth="220"
+                   style="-fx-background-radius: 8;
+                          -fx-border-radius: 8;
+                          -fx-border-color: #c8e6c9;
+                          -fx-background-color: rgba(255,255,255,0.9);
+                          -fx-font-size: 13px;
+                          -fx-prompt-text-fill: derive(gray,30%);"/>
+
+        <PasswordField fx:id="passwordField"
+                       promptText="🔒 Mật khẩu"
+                       prefWidth="220"
+                       style="-fx-background-radius: 8;
+                              -fx-border-radius: 8;
+                              -fx-border-color: #c8e6c9;
+                              -fx-background-color: rgba(255,255,255,0.9);
+                              -fx-font-size: 13px;
+                              -fx-prompt-text-fill: derive(gray,30%);"/>
+
+        <Button text="🎮 Đăng Nhập"
+                onAction="#handleLogin"
+                prefWidth="220"
+                style="-fx-background-color: linear-gradient(to right, #43a047, #2e7d32);
+                       -fx-text-fill: white;
+                       -fx-font-weight: bold;
+                       -fx-font-size: 13px;
+                       -fx-background-radius: 8;
+                       -fx-cursor: hand;"/>
+
+        <Label fx:id="errorLabel"
+               textFill="red"
+               style="-fx-font-size: 12px; -fx-font-weight: bold;"/>
+
+        <Label text="🌿 Chung tay bảo vệ môi trường!"
+               style="-fx-text-fill: #c8e6c9; -fx-font-size: 11px;"/>
+
+    </VBox>
+</VBox>
