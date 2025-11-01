@@ -3,7 +3,80 @@
     -fx-font-family: "Arial";
 }
 
+#clockLabel {
+    -fx-font-family: 'Orbitron';
+    -fx-font-size: 20px;
+    -fx-alignment: center;           /* Căn giữa nội dung trong label */
+    -fx-text-alignment: center;      /* Căn giữa văn bản */
+    -fx-text-fill: linear-gradient(to bottom, #ccffff, #00ffff);
+    -fx-effect: dropshadow(gaussian, #004466, 15, 0.8, 0, 0);
+    -fx-background-color: rgba(0, 64, 128, 0.4);
+    -fx-border-color: #00ffff;
+    -fx-border-radius: 8;
+    -fx-border-width: 2;
+    -fx-padding: 8 14 8 14;
+ 
+}
 
+
+
+#score, #result {
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-font-family: 'Press Start 2P';
+    -fx-font-size: 32px;
+
+    /* Màu chữ chuyển sắc xanh cyan sáng */
+    -fx-text-fill: linear-gradient(to bottom, #e0ffff, #00ccff);
+
+    /* Đổ bóng xanh đậm tạo nổi khối */
+    -fx-effect: dropshadow(gaussian, #003366, 8, 0.6, 2, 2);
+
+    /* Làm chữ hơi sáng để nổi bật trên nền pixel */
+    -fx-opacity: 0.95;
+}
+
+/* Hiệu ứng khi di chuột (hover) */
+#score:hover, #result:hover {
+    -fx-text-fill: linear-gradient(to bottom, #ffffff, #66ffff);
+    -fx-effect: dropshadow(gaussian, #00ffff, 15, 0.8, 0, 0);
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+}
+
+
+/* --- Nút RETURN --- */
+#btnReturn {
+    -fx-font-family: 'Press Start 2P';
+    -fx-font-size: 14px;
+    -fx-text-fill: #fff;
+    -fx-background-color: linear-gradient(to bottom, #ff9900, #cc3300);
+    -fx-background-radius: 8;
+    -fx-border-color: #ffcc33;
+    -fx-border-width: 3;
+    -fx-border-radius: 8;
+    -fx-padding: 10 20 10 20;
+    -fx-effect: dropshadow(gaussian, black, 10, 0.8, 0, 2);
+    -fx-cursor: hand;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-transition: all 0.2s ease-in-out;
+}
+
+/* --- Hiệu ứng khi di chuột --- */
+#btnReturn:hover {
+    -fx-background-color: linear-gradient(to bottom, #ffcc00, #ff6600);
+    -fx-border-color: #ffffff;
+    -fx-effect: dropshadow(gaussian, #ff6600, 15, 0.9, 0, 0);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+/* --- Hiệu ứng khi nhấn giữ --- */
+#btnReturn:pressed {
+    -fx-background-color: linear-gradient(to bottom, #cc3300, #990000);
+    -fx-translate-y: 2;
+}
 .button {
     -fx-background-color: #ffd54f;
     -fx-text-fill: black;

@@ -179,7 +179,11 @@ public class ClientHandler implements Runnable {
         if (gameRoom != null) {
             gameRoom.handlePlayerQuit(this);
         }
+        if(game != null){
+            game.handlePlayerQuit(this);
+        }
     }
+   
 
     private void handleGetMatchHistory() throws IOException, SQLException {
         List<MatchDetails> history = dbManager.getUserMatchHistory(user.getId());
@@ -331,7 +335,7 @@ public class ClientHandler implements Runnable {
     }
 
     public void clearGameRoom() {
-        this.gameRoom = null;
+        this.game = null;
     }
 
     public Server getServer() {

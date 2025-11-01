@@ -30,6 +30,7 @@ import javafx.util.Duration;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,6 +42,9 @@ import javafx.scene.control.Button;
 import server.ClientHandler;
 import server.DatabaseManager;
 import javafx.animation.TranslateTransition;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import static javafx.scene.input.KeyCode.DIGIT1;
@@ -117,7 +121,7 @@ public class GameUIController implements Initializable {
         Timeline timeline = new Timeline(
                 new KeyFrame(Duration.seconds(1), e -> {
                     timeLeft--;
-                    clockLabel.setText(String.valueOf(timeLeft));
+                    clockLabel.setText("Thời gian: "+String.valueOf(timeLeft)+" s");
                     // Khi hết giờ
                     if (timeLeft <= 0) {
                         try {
@@ -283,7 +287,31 @@ public class GameUIController implements Initializable {
 
     }
 
-    ;
+    @FXML
+    private void handleQuitGame() {
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Thoát Trò Chơi");
+            alert.setHeaderText(null);
+            alert.setContentText("Bạn có chắc chắn muốn thoát trò chơi không?");
+            ButtonType yesButton = new ButtonType("Có", ButtonBar.ButtonData.YES);
+            ButtonType noButton = new ButtonType("Không", ButtonBar.ButtonData.NO);
+            alert.getButtonTypes().setAll(yesButton, noButton);
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == yesButton) {
+                Message quitMessage = new Message("quit_game", null);
+                try {
+                    client.sendMessage(quitMessage);
+                    // Quay về màn hình chính
+                    client.showMainUI();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+    
 
     //
     public void updateScore(Message mess) {
@@ -315,6 +343,27 @@ public class GameUIController implements Initializable {
             );
         });
 
+    }
+    
+    public void endMatch(String result) {
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Kết Thúc Trận Đấu");
+            alert.setHeaderText(null);
+            alert.setContentText(result);
+            alert.show(); // Thay vì showAndWait()
+            // Chuyển về màn hình chính sau một khoảng thời gian
+            PauseTransition delay = new PauseTransition(Duration.seconds(2));
+            delay.setOnFinished(event -> {
+                try {
+                    client.showMainUI();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+            delay.play();
+           
+        });
     }
 
     public void setClient(Client client) {

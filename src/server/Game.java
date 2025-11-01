@@ -6,6 +6,7 @@ package server;
 
 import common.Message;
 import common.TrashItem;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Random;
 
@@ -41,6 +42,7 @@ public class Game {
         this.matchId = dbManager.saveMatch(player1.getUser().getId(), player2.getUser().getId(), 0);
     }
 
+    //startMatch,updatePoint, playerFinished, updateMatchWinner, handlePlayerQuit
     public void startMatch() {
         try {
             System.out.println("đã đến startMatch");
@@ -97,14 +99,17 @@ public class Game {
             resultForPlayer1 = "thắng " + score_player1 + " " + score_player2;
             resultForPlayer2 = "thua " + score_player2 + " " + score_player1;
             dbManager.updateMatchWinner(matchId, score_player1, score_player2, player1.getUser().getId(), "normal");
+            dbManager.updateUserPoints(player1.getUser().getId(), 5);
         } else if (score_player1 < score_player2) {
             dbManager.updateMatchWinner(matchId, score_player1, score_player2, player2.getUser().getId(), "normal");
             resultForPlayer1 = "thua " + score_player1 + " " + score_player2;
             resultForPlayer2 = "thắng " + score_player2 + " " + score_player1;
-        } else {
+            dbManager.updateUserPoints(player2.getUser().getId(), 5);
+        } else if(score_player1 == score_player2) {
             resultForPlayer1 = "hòa " + score_player1 + " " + score_player2;
             resultForPlayer2 = "hòa " + score_player2 + " " + score_player1;
             dbManager.updateMatchWinner(matchId, score_player1, score_player2, 0, "normal");
+            dbManager.updateUserPoints(player2.getUser().getId(), 2);
         }
         player1.getUser().setStatus("online");
         player2.getUser().setStatus("online");
@@ -116,6 +121,49 @@ public class Game {
         player1.sendMessage(new Message("finish_match_response", resultForPlayer1));
         player2.sendMessage(new Message("finish_match_response", resultForPlayer2));
         //cập nhập trạng thái cho 2 người chơi
+    }
+
+    //xử lý khi người chơi bỏ trận
+    public void handlePlayerQuit(ClientHandler quittingPlayer) throws SQLException, IOException {
+        String resultMessageToLoser = "Bạn đã thoát. Bạn thua trận đấu!";
+        String resultMessageToWinner = "Đối thủ đã thoát. Bạn thắng trận đấu!";
+
+        int winnerId = 0;
+        String endReason = "player_quit";
+        ClientHandler otherPlayer = (quittingPlayer == player1) ? player2
+                : (quittingPlayer == player2) ? player1 : null;
+        winnerId = otherPlayer.getUser().getId();
+
+        if (winnerId != 0) {
+            dbManager.updateUserPoints(winnerId, 5);
+            dbManager.updateMatchWinner(matchId, 0, 0, winnerId, endReason);
+        }
+
+        // cap nhat status "ingame" -> "online"
+        player1.getUser().setStatus("online");
+        player2.getUser().setStatus("online");
+
+        dbManager.updateUserStatus(player1.getUser().getId(), "online");
+        dbManager.updateUserStatus(player2.getUser().getId(), "online");
+
+        player1.getServer()
+                .broadcast(new Message("status_update", player1.getUser().getUsername() + " is online"));
+        player2.getServer()
+                .broadcast(new Message("status_update", player2.getUser().getUsername() + " is online"));
+        // ------------------------------------------------------------
+
+        // Gửi thông báo kết thúc trận đấu cho cả hai người chơi
+        quittingPlayer.sendMessage(new Message("match_end", resultMessageToLoser));
+        if (otherPlayer != null) {
+            otherPlayer.sendMessage(new Message("match_end", resultMessageToWinner));
+        }
+        // Sử dụng phương thức clearGameRoom() để đặt gameRoom thành null
+        if (player1 != null) {
+            player1.clearGameRoom();
+        }
+        if (player2 != null) {
+            player2.clearGameRoom();
+        }
 
     }
 

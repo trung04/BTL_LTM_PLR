@@ -22,7 +22,7 @@
    </ImageView>
    <Label fx:id="myScore" layoutX="664.0" layoutY="55.0" prefHeight="27.0" prefWidth="134.0" text="You : 0" />
    <Label fx:id="opponentScore" layoutX="667.0" layoutY="82.0" prefHeight="27.0" prefWidth="134.0" text="OPPONENT : 0" />
-   <Label fx:id="clockLabel" layoutX="653.0" layoutY="192.0" text="Label" />
-   <Button fx:id="btExit" layoutX="772.0" layoutY="495.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="56.0" text="Exit" />
+   <Label fx:id="clockLabel" layoutX="620.0" layoutY="174.0" prefHeight="17.0" prefWidth="223.0" text="Label" />
+   <Button fx:id="btExit" layoutX="772.0" layoutY="495.0" mnemonicParsing="false" onAction="#handleQuitGame" prefHeight="25.0" prefWidth="56.0" text="Exit" />
 
 </AnchorPane>

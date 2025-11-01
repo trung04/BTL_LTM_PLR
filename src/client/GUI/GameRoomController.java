@@ -644,7 +644,7 @@ public class GameRoomController {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Thoát Trò Chơi");
             alert.setHeaderText(null);
-            alert.setContentText("Bạn có chắc chắn muốn thoát trò chơi không?");
+            alert.setContentText("Bạn sẽ bị trừ điểm nếu thoát trò chơi, bạn có muốn không ?");
             ButtonType yesButton = new ButtonType("Có", ButtonBar.ButtonData.YES);
             ButtonType noButton = new ButtonType("Không", ButtonBar.ButtonData.NO);
             alert.getButtonTypes().setAll(yesButton, noButton);

@@ -175,18 +175,7 @@ public class Client {
                     showGameUI();
                 });
                 break;
-            case "kick_result":
-                Platform.runLater(() -> {
-                    if (gameRoomController != null) {
-                        String[] result = ((String) message.getContent()).split("-");
-                        if (result[0].equals("win")) {
-                            gameRoomController.animateShootVao(result[1], result[2]);
-                        } else {
-                            gameRoomController.animateShootKhongVao(result[1], result[2]);
-                        }
-                    }
-                });
-                break;
+            
             case "round_result":
                 Platform.runLater(() -> {
                     if (gameRoomController != null) {
@@ -196,8 +185,9 @@ public class Client {
                 break;
             case "match_end":
                 Platform.runLater(() -> {
-                    if (gameRoomController != null) {
-                        gameRoomController.endMatch((String) message.getContent());
+                    if(gameUIController != null){
+                        gameUIController.endMatch((String) message.getContent());
+                        this.gameUIController=null;
                     }
                 });
                 break;
@@ -275,47 +265,11 @@ public class Client {
                 });
                 break;
 
-            case "your_turn":
-                int duration = (int) message.getContent();
-                Platform.runLater(() -> {
-                    if (gameRoomController != null) {
-                        gameRoomController.promptYourTurn(duration);
-                    }
-                });
-                break;
-            case "goalkeeper_turn":
-                int duration1 = (int) message.getContent();
-                Platform.runLater(() -> {
-                    if (gameRoomController != null) {
-                        gameRoomController.promptGoalkeeperTurn(duration1);
-                    }
-                });
-                break;
 
-            case "opponent_turn":
-                int duration2 = (int) message.getContent();
-                Platform.runLater(() -> {
-                    if (gameRoomController != null) {
-                        gameRoomController.handleOpponentTurn(duration2);
-                    }
-                });
-                break;
+            
 
-            case "timeout":
-                Platform.runLater(() -> {
-                    if (gameRoomController != null) {
-                        gameRoomController.handleTimeout((String) message.getContent());
-                    }
-                });
-                break;
-            case "opponent_timeout":
-                Platform.runLater(() -> {
-                    if (gameRoomController != null) {
-                        gameRoomController.handleOpponentTimeout((String) message.getContent());
-                    }
-                });
-                break;
-
+          
+   
             // Các loại message khác
             // ...
         }

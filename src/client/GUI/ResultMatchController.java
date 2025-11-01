@@ -29,7 +29,7 @@ public class ResultMatchController implements Initializable {
     private String resultMatch;
     private Client client;
     @FXML
-    private Button btnExit;
+    private Button btnReturn;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

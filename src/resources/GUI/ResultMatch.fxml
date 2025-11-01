@@ -7,24 +7,24 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="451.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.GUI.ResultMatchController">
+<AnchorPane id="AnchorPane" prefHeight="312.0" prefWidth="575.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.GUI.ResultMatchController">
     <children>
-        <ImageView fitHeight="400.0" fitWidth="226.0" layoutX="113.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../../assets/result.png" />
-            </image>
-        </ImageView>
         <Label layoutX="105.0" layoutY="312.0" />
-        <Label fx:id="result" layoutX="180.0" layoutY="156.0" prefHeight="38.0" prefWidth="92.0" text="Label" textFill="#e9f71e">
+      <ImageView fitHeight="376.0" fitWidth="638.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../assets/background.jpeg" />
+         </image>
+      </ImageView>
+        <Label fx:id="result" layoutY="140.0" prefHeight="39.0" prefWidth="638.0" text="va " textAlignment="CENTER">
             <font>
                 <Font size="26.0" />
             </font>
         </Label>
-        <Label fx:id="score" layoutX="179.0" layoutY="98.0" text="score" textFill="#f1ff29">
+        <Label fx:id="score" contentDisplay="TOP" layoutY="71.0" prefHeight="58.0" prefWidth="638.0" text="score" textAlignment="CENTER">
             <font>
                 <Font size="40.0" />
             </font>
         </Label>
-        <Button fx:id="btnExit" layoutX="154.0" layoutY="275.0" mnemonicParsing="false" onAction="#goToLobby" prefHeight="58.0" prefWidth="149.0" text="Return" />
+        <Button fx:id="btnReturn" layoutX="230.0" layoutY="247.0" mnemonicParsing="false" onAction="#goToLobby" prefHeight="58.0" prefWidth="149.0" text="Return" />
     </children>
 </AnchorPane>

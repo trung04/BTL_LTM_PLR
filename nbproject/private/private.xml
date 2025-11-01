@@ -5,8 +5,6 @@
         <group>
             <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/client/GUI/LoginController.java</file>
             <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/client/GUI/GameRoomController.java</file>
-            <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/client/GUI/GameUIController.java</file>
-            <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/server/ClientHandler.java</file>
             <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/resources/GameRoomUI.fxml</file>
             <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/client/ClientApp.java</file>
             <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/client/GUI/MainController.java</file>
@@ -24,8 +22,10 @@
             <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/common/Message.java</file>
             <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/client/GUI/ResultMatchController.java</file>
             <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/resources/GUI/ResultMatch.fxml</file>
-            <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/resources/GUI/style.css</file>
             <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/common/User.java</file>
+            <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/client/GUI/GameUIController.java</file>
+            <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/server/ClientHandler.java</file>
+            <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/resources/GUI/style.css</file>
         </group>
     </open-files>
 </project-private>
