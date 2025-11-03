@@ -6,6 +6,15 @@
             <file>file:/D:/LTM/BTL_LTM_PLR/src/server/Server.java</file>
             <file>file:/D:/LTM/BTL_LTM_PLR/src/client/ClientApp.java</file>
             <file>file:/D:/LTM/BTL_LTM_PLR/src/resources/GUI/style.css</file>
+            <file>file:/D:/LTM/BTL_LTM_PLR/src/resources/GUI/LoginUI.fxml</file>
+            <file>file:/D:/LTM/BTL_LTM_PLR/src/resources/GUI/ResultMatch.fxml</file>
+            <file>file:/D:/LTM/BTL_LTM_PLR/src/server/GameRoom.java</file>
+            <file>file:/D:/LTM/BTL_LTM_PLR/src/server/DatabaseManager.java</file>
+            <file>file:/D:/LTM/BTL_LTM_PLR/src/server/Game.java</file>
+            <file>file:/D:/LTM/BTL_LTM_PLR/src/resources/GUI/GameUI.fxml</file>
+            <file>file:/D:/LTM/BTL_LTM_PLR/src/client/Client.java</file>
+            <file>file:/D:/LTM/BTL_LTM_PLR/src/client/TestApp.java</file>
+            <file>file:/D:/LTM/BTL_LTM_PLR/src/btl_plr/BTL_PLR.java</file>
         </group>
     </open-files>
 </project-private>

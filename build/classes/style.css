@@ -2,9 +2,6 @@
 .root {
     -fx-font-family: "Arial";
 }
-.gunny-text {
-
-}
 
 /*#clockLabel {
     -fx-font-family: 'Orbitron';
@@ -28,8 +25,6 @@
     -fx-background-color: rgba(220, 245, 230, 0.85); /* xanh lá pastel mờ */
     -fx-padding: 25;
     -fx-spacing: 18;
-    -fx-border-radius: 18;
-    -fx-background-radius: 18;
     -fx-effect: dropshadow(gaussian, rgba(100,150,100,0.4), 10, 0, 0, 0);
     -fx-pref-width: 260;
     -fx-alignment: center;
@@ -74,14 +69,17 @@
 
 /* Giao diện kết quả  */
 #score, #result {
+   
     -fx-font-family: 'Comic Sans MS', 'Arial Black', sans-serif;
-        -fx-font-weight: bold;
-        -fx-font-size: 32px;
-        -fx-text-fill: #ffcc00; /* vàng tươi */
-        -fx-effect: dropshadow(gaussian, #663300, 5, 0.5, 2, 2);
-        -fx-stroke: #4d2e00;
-        -fx-stroke-width: 2;
-        -fx-translate-y: 2;
+    -fx-font-weight: bold;
+    -fx-font-size: 32px;
+    -fx-text-fill: #ffcc00; /* vàng tươi */
+    -fx-effect: dropshadow(gaussian, #663300, 5, 0.5, 2, 2);
+    -fx-stroke: #4d2e00;
+    -fx-stroke-width: 2;
+    -fx-translate-y: 2;
+     -fx-alignment: center;
+    -fx-text-alignment: center;
 }
 
 /* Hiệu ứng khi di chuột (hover) */
@@ -162,7 +160,7 @@
     -fx-font-size: 14px;
 }
 
-.menu-bar .menu:hover, 
+.menu-bar .menu:hover,
 .menu-bar .menu:focused {
     -fx-background-color: #5AA573;
 }
@@ -250,7 +248,7 @@
     -fx-border-width: 0 0 1 0;
 }
 
-.table-view .column-header, 
+.table-view .column-header,
 .table-view .column-header .label {
     -fx-text-fill: #2F4D2F;
     -fx-font-weight: bold;
@@ -260,7 +258,7 @@
 }
 
 /* Row chọn */
-.table-row-cell:filled:selected, 
+.table-row-cell:filled:selected,
 .table-cell:filled:selected {
     -fx-background-color: #A4DBC5;
     -fx-text-fill: #1F3D2B;
