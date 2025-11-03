@@ -1,78 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/8"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="client.GUI.LoginController"
-      alignment="CENTER"
-      spacing="10.0"
-      prefWidth="500"
-      prefHeight="320"
-      style="-fx-background-image: url('/assets/image2.jpg');
-             -fx-background-size: cover;
-             -fx-background-position: center;
-             -fx-background-repeat: no-repeat;">
+<VBox alignment="CENTER" prefHeight="377.0" prefWidth="523.0" spacing="10.0" style="-fx-background-image: url('/assets/loginB.jpeg');              -fx-background-size: cover;              -fx-background-position: center;              -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.GUI.LoginController">
 
     <padding>
-        <Insets top="20" right="20" bottom="20" left="20"/>
+        <Insets bottom="20" left="20" right="20" top="20" />
     </padding>
 
     <!-- Khung trong suốt chứa nội dung đăng nhập -->
-    <VBox spacing="10" alignment="CENTER"
-          style="-fx-background-color: rgba(0, 0, 0, 0.35);
-                 -fx-background-radius: 15;
-                 -fx-padding: 20;
-                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 1, 1);
-                 -fx-max-width: 320;">
+    <VBox alignment="CENTER" spacing="10" style="-fx-background-color: rgba(0, 0, 0, 0.35);                  -fx-background-radius: 15;                  -fx-padding: 20;                  -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 1, 1);                  -fx-max-width: 320;">
 
-        <Label text="♻️ Game Phân Loại Rác ♻️"
-               style="-fx-font-size: 22px;
-                      -fx-font-weight: bold;
-                      -fx-text-fill: #ffffff;
-                      -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 2, 0, 1, 1);"/>
+        <Label  style="
+        -fx-font-family: 'Comic Sans MS', 'Arial Black', sans-serif;
+        -fx-font-weight: bold;
+        -fx-font-size: 14px;
+        -fx-text-fill: #ffcc00; /* vàng tươi */
+        -fx-effect: dropshadow(gaussian, #663300, 5, 0.5, 2, 2);
+        -fx-stroke: #4d2e00;
+        -fx-stroke-width: 2;
+        -fx-translate-y: 2;
+    "  text="Phân Loại Rác" />
 
-        <Label text="Đăng nhập để bắt đầu trò chơi!"
-               style="-fx-font-size: 13px; -fx-text-fill: #e8f5e9;"/>
+        <Label style="-fx-font-size: 13px; -fx-text-fill: #e8f5e9;" text="Đăng nhập để bắt đầu trò chơi!" />
 
-        <TextField fx:id="usernameField"
-                   promptText="👤 Tên đăng nhập"
-                   prefWidth="220"
-                   style="-fx-background-radius: 8;
-                          -fx-border-radius: 8;
-                          -fx-border-color: #c8e6c9;
-                          -fx-background-color: rgba(255,255,255,0.9);
-                          -fx-font-size: 13px;
-                          -fx-prompt-text-fill: derive(gray,30%);"/>
+        <TextField fx:id="usernameField" prefWidth="220" promptText="👤 Tên đăng nhập" style="-fx-background-radius: 8;                           -fx-border-radius: 8;                           -fx-border-color: #c8e6c9;                           -fx-background-color: rgba(255,255,255,0.9);                           -fx-font-size: 13px;                           -fx-prompt-text-fill: derive(gray,30%);" />
 
-        <PasswordField fx:id="passwordField"
-                       promptText="🔒 Mật khẩu"
-                       prefWidth="220"
-                       style="-fx-background-radius: 8;
-                              -fx-border-radius: 8;
-                              -fx-border-color: #c8e6c9;
-                              -fx-background-color: rgba(255,255,255,0.9);
-                              -fx-font-size: 13px;
-                              -fx-prompt-text-fill: derive(gray,30%);"/>
+        <PasswordField fx:id="passwordField" prefWidth="220" promptText="🔒 Mật khẩu" style="-fx-background-radius: 8;                               -fx-border-radius: 8;                               -fx-border-color: #c8e6c9;                               -fx-background-color: rgba(255,255,255,0.9);                               -fx-font-size: 13px;                               -fx-prompt-text-fill: derive(gray,30%);" />
 
-        <Button text="🎮 Đăng Nhập"
-                onAction="#handleLogin"
-                prefWidth="220"
-                style="-fx-background-color: linear-gradient(to right, #43a047, #2e7d32);
-                       -fx-text-fill: white;
-                       -fx-font-weight: bold;
-                       -fx-font-size: 13px;
-                       -fx-background-radius: 8;
-                       -fx-cursor: hand;"/>
+        <Button onAction="#handleLogin" prefWidth="220" style="-fx-background-color: linear-gradient(to right, #43a047, #2e7d32);                        -fx-text-fill: white;                        -fx-font-weight: bold;                        -fx-font-size: 13px;                        -fx-background-radius: 8;                        -fx-cursor: hand;" text="🎮 Đăng Nhập" />
 
-        <Label fx:id="errorLabel"
-               textFill="red"
-               style="-fx-font-size: 12px; -fx-font-weight: bold;"/>
+        <Label fx:id="errorLabel" style="-fx-font-size: 12px; -fx-font-weight: bold;" textFill="red" />
 
-        <Label text="🌿 Chung tay bảo vệ môi trường!"
-               style="-fx-text-fill: #c8e6c9; -fx-font-size: 11px;"/>
+        <Label style="-fx-text-fill: #c8e6c9; -fx-font-size: 11px;" text="🌿 Chung tay bảo vệ môi trường!" />
 
     </VBox>
 </VBox>

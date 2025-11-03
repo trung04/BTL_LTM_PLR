@@ -7,14 +7,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="312.0" prefWidth="575.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.GUI.ResultMatchController">
+<AnchorPane    style="-fx-background-image: url('@../../assets/background.jpeg');
+           -fx-background-size: cover;
+           -fx-background-repeat: no-repeat;
+           -fx-background-position: center center;" id="AnchorPane" prefHeight="312.0" prefWidth="575.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.GUI.ResultMatchController">
     <children>
         <Label layoutX="105.0" layoutY="312.0" />
-      <ImageView fitHeight="376.0" fitWidth="638.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../assets/background.jpeg" />
-         </image>
-      </ImageView>
+     
         <Label fx:id="result" layoutY="140.0" prefHeight="39.0" prefWidth="638.0" text="va " textAlignment="CENTER">
             <font>
                 <Font size="26.0" />

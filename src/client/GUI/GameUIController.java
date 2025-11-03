@@ -49,6 +49,7 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import static javafx.scene.input.KeyCode.DIGIT1;
 import static javafx.scene.input.KeyCode.DIGIT2;
+import javafx.scene.layout.VBox;
 
 public class GameUIController implements Initializable {
 
@@ -59,7 +60,8 @@ public class GameUIController implements Initializable {
     private final Random random = new Random();
     @FXML
     private Label scoreLabel;
-
+    @FXML
+    private VBox  scoreBox;
     @FXML
     private Button btnStart;
     @FXML
@@ -121,7 +123,7 @@ public class GameUIController implements Initializable {
         Timeline timeline = new Timeline(
                 new KeyFrame(Duration.seconds(1), e -> {
                     timeLeft--;
-                    clockLabel.setText("Thời gian: "+String.valueOf(timeLeft)+" s");
+                    clockLabel.setText("Thời gian: " + String.valueOf(timeLeft) + " s");
                     // Khi hết giờ
                     if (timeLeft <= 0) {
                         try {
@@ -311,7 +313,6 @@ public class GameUIController implements Initializable {
             }
         });
     }
-    
 
     //
     public void updateScore(Message mess) {
@@ -320,31 +321,12 @@ public class GameUIController implements Initializable {
             String m = (String) mess.getContent();
             String[] scores = m.trim().split("\\s+");
             myScore.setText("YOU : " + scores[0]);
-            myScore.setStyle(
-                    "-fx-font-family: 'Press Start 2P';"
-                    + // Font pixel cổ điển
-                    "-fx-font-size: 14px;"
-                    + "-fx-text-fill: #FFD700;"
-                    + // Màu vàng sáng
-                    "-fx-effect: dropshadow(gaussian, black, 2, 0, 1, 1);"
-                    + // Viền đen nhỏ
-                    "-fx-padding: 5px;"
-            );
             opponentScore.setText("OPPONENT : " + scores[1]);
-            opponentScore.setStyle(
-                    "-fx-font-family: 'Press Start 2P';"
-                    + // Font pixel cổ điển
-                    "-fx-font-size: 14px;"
-                    + "-fx-text-fill: #FFD700;"
-                    + // Màu vàng sáng
-                    "-fx-effect: dropshadow(gaussian, black, 2, 0, 1, 1);"
-                    + // Viền đen nhỏ
-                    "-fx-padding: 5px;"
-            );
+         
         });
 
     }
-    
+
     public void endMatch(String result) {
         Platform.runLater(() -> {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -362,7 +344,7 @@ public class GameUIController implements Initializable {
                 }
             });
             delay.play();
-           
+
         });
     }
 

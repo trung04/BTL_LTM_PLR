@@ -11,7 +11,7 @@ import javafx.util.Pair;
 
 public class DatabaseManager {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/btl_ltm";
+    private static final String URL = "jdbc:mysql://localhost:3306/blt_ltm";
     private static final String USER = "root"; // Thay bằng user MySQL của bạn
     private static final String PASSWORD = ""; // Thay bằng password MySQL của bạn
 

@@ -17,7 +17,7 @@ public class ClientApp extends Application {
             new Thread(() -> {
                 try {
                     // Thay "localhost" bằng địa chỉ IP của server nếu cần
-                    client.startConnection("localhost", 12345);
+                    client.startConnection("26.73.211.67", 12345);
                 } catch (Exception e) {
                     e.printStackTrace();
                     client.showErrorAlert("Không thể kết nối tới server.");

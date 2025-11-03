@@ -44,7 +44,7 @@ public class ResultMatchController implements Initializable {
     public void setResultMatch(String m) {
         String[] word = m.trim().split("\\s+");
         result.setText("YOU : " + String.valueOf(word[0]));
-        score.setText(String.valueOf(word[1] + " " + String.valueOf(word[2])));
+        score.setText(String.valueOf(word[1] + " - " + String.valueOf(word[2])));
     }
 
     public void setClient(Client client) {

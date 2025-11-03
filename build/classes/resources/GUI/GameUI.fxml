@@ -5,24 +5,29 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="534.0" prefWidth="842.0" style="-fx-background-image: url(&quot;assets\background.png&quot;); -fx-background-size: cover; -fx-background-position: center;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.GUI.GameUIController">
-   <ImageView fitHeight="540.0" fitWidth="626.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../../assets/envi.jpg" />
-      </image>
-   </ImageView>
-   <ImageView fitHeight="64.0" fitWidth="56.0" layoutX="179.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true" />
-   <ImageView fitHeight="64.0" fitWidth="56.0" layoutX="187.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true" />
-   <ImageView fitHeight="64.0" fitWidth="56.0" layoutX="189.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true" />
-   <ImageView fx:id="scoreBoard" fitHeight="298.0" fitWidth="290.0" layoutX="589.0" layoutY="-63.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../../assets/score_board.png" />
-      </image>
-   </ImageView>
-   <Label fx:id="myScore" layoutX="664.0" layoutY="55.0" prefHeight="27.0" prefWidth="134.0" text="You : 0" />
-   <Label fx:id="opponentScore" layoutX="667.0" layoutY="82.0" prefHeight="27.0" prefWidth="134.0" text="OPPONENT : 0" />
-   <Label fx:id="clockLabel" layoutX="620.0" layoutY="174.0" prefHeight="17.0" prefWidth="223.0" text="Label" />
-   <Button fx:id="btExit" layoutX="772.0" layoutY="495.0" mnemonicParsing="false" onAction="#handleQuitGame" prefHeight="25.0" prefWidth="56.0" text="Exit" />
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="534.0" prefWidth="842.0" 
+
+   style="-fx-background-image: url('@../../assets/gameUi.jpg');
+           -fx-background-size: cover;
+           -fx-background-repeat: no-repeat;
+           -fx-background-position: center center;"
+
+
+            xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.GUI.GameUIController">
+ 
+    <ImageView fitHeight="64.0" fitWidth="56.0" layoutX="179.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true" />
+    <ImageView fitHeight="64.0" fitWidth="56.0" layoutX="187.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true" />
+    <ImageView fitHeight="64.0" fitWidth="56.0" layoutX="189.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true" />
+    <VBox fx:id="scoreBox" layoutX="617.0" prefHeight="534.0" prefWidth="225.0" spacing="10.0" styleClass="score-box">
+        <Label fx:id="myScore" styleClass="score-label" text="You : 0" />
+        <Label fx:id="opponentScore" styleClass="score-label" text="OPPONENT : 0" />
+        <Label fx:id="clockLabel" styleClass="clock-label" text="00:00" />
+        <Button fx:id="btExit" mnemonicParsing="false" onAction="#handleQuitGame" styleClass="exit-button" text="Exit" />
+    </VBox>
+
+
+   
 
 </AnchorPane>

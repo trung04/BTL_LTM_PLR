@@ -3,29 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/client/GUI/LoginController.java</file>
-            <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/client/GUI/GameRoomController.java</file>
-            <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/resources/GameRoomUI.fxml</file>
-            <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/client/ClientApp.java</file>
-            <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/client/GUI/MainController.java</file>
-            <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/client/Client.java</file>
-            <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/client/TestApp.java</file>
-            <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/server/Server.java</file>
-            <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/server/GameRoom.java</file>
-            <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/resources/GUI/GameRoomUI.fxml</file>
-            <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/server/Game.java</file>
-            <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/resources/GUI/GameUI.fxml</file>
-            <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/common/TrashBin.java</file>
-            <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/server/DatabaseManager.java</file>
-            <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/common/TrashItem.java</file>
-            <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/common/MatchDetails.java</file>
-            <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/common/Message.java</file>
-            <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/client/GUI/ResultMatchController.java</file>
-            <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/resources/GUI/ResultMatch.fxml</file>
-            <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/common/User.java</file>
-            <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/client/GUI/GameUIController.java</file>
-            <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/server/ClientHandler.java</file>
-            <file>file:/C:/Users/Dung/Documents/NetBeansProjects/BTL_PLR/src/resources/GUI/style.css</file>
+            <file>file:/D:/LTM/BTL_LTM_PLR/src/server/Server.java</file>
+            <file>file:/D:/LTM/BTL_LTM_PLR/src/client/ClientApp.java</file>
+            <file>file:/D:/LTM/BTL_LTM_PLR/src/resources/GUI/style.css</file>
         </group>
     </open-files>
 </project-private>
