@@ -7,6 +7,7 @@ import client.GUI.MainController;
 import client.GUI.ResultMatchController;
 import common.Match;
 import common.MatchDetails;
+import common.MatchDetail;
 import common.Message;
 import common.User;
 import javafx.application.Platform;
@@ -160,6 +161,7 @@ public class Client {
             case "finish_match_response":
                 System.out.println(message.getContent());
                 Platform.runLater(() -> {
+                    gameUIController.stopBackgroundMusic();
                     showResultMatch(message);
                 });
                 break;
@@ -172,10 +174,11 @@ public class Client {
                 break;
             case "match_start":
                 Platform.runLater(() -> {
+                    mainController.stopBackgroundMusic();
                     showGameUI();
                 });
                 break;
-            
+
             case "round_result":
                 Platform.runLater(() -> {
                     if (gameRoomController != null) {
@@ -185,9 +188,9 @@ public class Client {
                 break;
             case "match_end":
                 Platform.runLater(() -> {
-                    if(gameUIController != null){
+                    if (gameUIController != null) {
                         gameUIController.endMatch((String) message.getContent());
-                        this.gameUIController=null;
+                        this.gameUIController = null;
                     }
                 });
                 break;
@@ -215,7 +218,7 @@ public class Client {
                 break;
 
             case "match_history":
-                List<MatchDetails> history = (List<MatchDetails>) message.getContent();
+                List<MatchDetail> history = (List<MatchDetail>) message.getContent();
                 Platform.runLater(() -> {
                     if (mainController != null) {
                         mainController.updateMatchHistory(history);
@@ -232,10 +235,10 @@ public class Client {
                 });
                 break;
             case "match_details":
-                List<MatchDetails> details = (List<MatchDetails>) message.getContent();
+                List<MatchDetail> details = (List<MatchDetail>) message.getContent();
                 Platform.runLater(() -> {
                     if (mainController != null) {
-                        mainController.showMatchDetails(details);
+                        mainController.showMatchDetails2(details);
                     }
                 });
                 break;
@@ -265,11 +268,6 @@ public class Client {
                 });
                 break;
 
-
-            
-
-          
-   
             // Các loại message khác
             // ...
         }
@@ -348,43 +346,6 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
             showErrorAlert("Không thể tải giao diện đăng nhập.");
-        }
-    }
-
-    public void showGameRoomUI(String startMessage) {
-        try {
-            System.out.println("Loading GameRoomUI.fxml...");
-            FXMLLoader loader = new FXMLLoader(GameRoomController.class.getResource("/resources/GUI/GameRoomUI.fxml"));
-            Parent root = loader.load();
-            gameRoomController = loader.getController();
-
-            if (gameRoomController == null) {
-                System.err.println("Controller is null for GameRoomUI.fxml");
-                showErrorAlert("Không thể tải controller giao diện phòng chơi.");
-                return;
-            }
-
-            gameRoomController.setClient(this);
-            Scene scene = new Scene(root);
-
-            URL cssLocation = GameRoomController.class.getResource("/resources/GUI/style.css");
-            if (cssLocation != null) {
-                scene.getStylesheets().add(cssLocation.toExternalForm());
-                System.out.println("CSS file loaded: " + cssLocation.toExternalForm());
-            } else {
-                System.err.println("Cannot find CSS file: style.css");
-            }
-
-            primaryStage.setScene(scene);
-            primaryStage.setTitle("Penalty Shootout - Game Room");
-            primaryStage.show();
-
-            // Hiển thị thông báo vai trò
-            gameRoomController.showStartMessage(startMessage);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            showErrorAlert("Không thể tải giao diện phòng chơi.");
         }
     }
 

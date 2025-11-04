@@ -2,6 +2,7 @@ package client.GUI;
 
 import client.Client;
 import common.Match;
+import common.MatchDetail;
 import common.MatchDetails;
 import common.Message;
 import common.User;
@@ -21,6 +22,9 @@ import java.util.logging.Logger;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.sql.Timestamp;
 import javafx.application.Platform;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class MainController {
 
@@ -54,15 +58,17 @@ public class MainController {
     private TableColumn<User, Integer> lbPointsColumn;
 
     @FXML
-    private TableView<MatchDetails> historyTable;
+    private TableView<MatchDetail> historyTable2;
     @FXML
-    private TableColumn<MatchDetails, Integer> roundColumn;
+    private TableColumn<MatchDetail, Integer> idColumn;
     @FXML
-    private TableColumn<MatchDetails, String> roleColumn;
+    private TableColumn<MatchDetail, String> nameTrashColumn;
     @FXML
-    private TableColumn<MatchDetails, String> directionColumn;
+    private TableColumn<MatchDetail, String> typeTrashColumn;
     @FXML
-    private TableColumn<MatchDetails, String> historyResultColumn;
+    private TableColumn<MatchDetail, String> resultColumn;
+    @FXML
+    private TableColumn<MatchDetail, String> timeTrashColumn;
 
     @FXML
     private TableView<Match> matchesTable;
@@ -70,6 +76,8 @@ public class MainController {
     private TableColumn<Match, Integer> matchIdColumn;
     @FXML
     private TableColumn<Match, String> opponentColumn;
+    @FXML
+    private TableColumn<Match, String> scoreMatchColumn;
     @FXML
     private TableColumn<Match, String> matchResultColumn;
 
@@ -172,7 +180,7 @@ public class MainController {
 
         alert.showAndWait().ifPresent(response -> {
             boolean accepted = response == ButtonType.OK;
-            Object[] data = { requesterId, accepted };
+            Object[] data = {requesterId, accepted};
             Message responseMessage = new Message("match_response", data);
             try {
                 client.sendMessage(responseMessage);
@@ -192,9 +200,32 @@ public class MainController {
     }
 
     int demRole = 0;
+    private MediaPlayer bgm;
+// 🛑 Gọi hàm này khi thoát giao diện
+    //Ngững phát nhạc
+    public void stopBackgroundMusic() {
+        if (bgm != null) {
+            bgm.stop();       // dừng phát
+            bgm.dispose();    // giải phóng tài nguyên
+            bgm = null;
+        }
+    }
 
     @FXML
     private void initialize() {
+        //cấu hình âm thanh game background
+
+        new Thread(() -> {
+            try {
+                Media media = new Media(getClass().getResource("/sound/main.mp3").toExternalForm());
+                bgm = new MediaPlayer(media);
+                bgm.setVolume(0.4);
+                bgm.setCycleCount(MediaPlayer.INDEFINITE);
+                bgm.play();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
 
         // Cấu hình bảng người chơi
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
@@ -273,57 +304,12 @@ public class MainController {
         lbNameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
         lbPointsColumn.setCellValueFactory(new PropertyValueFactory<>("points"));
 
-        // Cấu hình bảng lịch sử đấu
-        roundColumn.setCellValueFactory(new PropertyValueFactory<>("round"));
-        roleColumn.setCellValueFactory(cellData -> {
-            MatchDetails md = cellData.getValue();
-            String role;
-            if (demRole % 2 == 0)
-                role = (md.getShooterId() == client.getUser().getId()) ? "Sút" : "Bắt";
-            else
-                role = (md.getShooterId() == client.getUser().getId()) ? "Bắt" : "Sút";
-            demRole += 1;
-            return new SimpleStringProperty(role);
-        });
-        directionColumn.setCellValueFactory(cellData -> {
-            MatchDetails md = cellData.getValue();
-            String direction = (md.getShooterId() == client.getUser().getId()) ? md.getShooterDirection()
-                    : md.getGoalkeeperDirection();
-            return new SimpleStringProperty(direction);
-        });
-        historyResultColumn.setCellValueFactory(cellData -> {
-            MatchDetails md = cellData.getValue();
-            String result = "";
-            if (md.getShooterId() == client.getUser().getId()) {
-                if (md.getShooterDirection() != null && md.getGoalkeeperDirection() != null
-                        && md.getShooterDirection().equalsIgnoreCase(md.getGoalkeeperDirection())) {
-                    if (md.getRound() % 2 == 1)
-                        result = "lose";
-                    else
-                        result = "win";
-                } else {
-                    if (md.getRound() % 2 == 1)
-                        result = "win";
-                    else
-                        result = "lose";
-                }
-
-            } else {
-                if (md.getShooterDirection() != null && md.getGoalkeeperDirection() != null
-                        && md.getShooterDirection().equalsIgnoreCase(md.getGoalkeeperDirection())) {
-                    if (md.getRound() % 2 == 1)
-                        result = "win";
-                    else
-                        result = "lose";
-                } else {
-                    if (md.getRound() % 2 == 1)
-                        result = "lose";
-                    else
-                        result = "win";
-                }
-            }
-            return new SimpleStringProperty(result);
-        });
+//         Cấu hình bảng lịch sử đấu
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        nameTrashColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        typeTrashColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+        resultColumn.setCellValueFactory(new PropertyValueFactory<>("result"));
+        timeTrashColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
 
         // Cấu hình bảng danh sách trận đấu
         matchIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -331,6 +317,11 @@ public class MainController {
             Match match = cellData.getValue();
             String opponentName = match.getOpponentName(client.getUser().getId());
             return new SimpleStringProperty(opponentName);
+        });
+        scoreMatchColumn.setCellValueFactory(cellData -> {
+            Match match = cellData.getValue();
+            String scoreMatch = match.getScoreMatch(client.getUser().getId());
+            return new SimpleStringProperty(scoreMatch);
         });
         matchResultColumn.setCellValueFactory(cellData -> {
             Match match = cellData.getValue();
@@ -344,18 +335,13 @@ public class MainController {
             return new SimpleStringProperty(time != null ? time.toString() : "");
         });
 
-        // Cấu hình cột thời gian cho historyTable
-        timeColumn.setCellValueFactory(cellData -> {
-            Timestamp time = cellData.getValue().getTime();
-            return new SimpleStringProperty(time != null ? time.toString() : "");
-        });
-
         // Sự kiện click để hiển thị chi tiết trận đấu (sửa đổi để sử dụng listener)
         matchesTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 Match clickedMatch = newValue;
                 try {
                     Message request = new Message("get_match_details", clickedMatch.getId());
+                    System.out.println(clickedMatch.getId());
                     client.sendMessage(request);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -364,9 +350,9 @@ public class MainController {
         });
     }
 
-    public void showMatchDetails(List<MatchDetails> details) {
-        ObservableList<MatchDetails> detailsList = FXCollections.observableArrayList(details);
-        historyTable.setItems(detailsList);
+    public void showMatchDetails2(List<MatchDetail> details) {
+        ObservableList<MatchDetail> detailsList = FXCollections.observableArrayList(details);
+        historyTable2.setItems(detailsList);
     }
 
     public void updateMatchesList(List<Match> matches) {
@@ -379,8 +365,8 @@ public class MainController {
         client.sendMessage(request);
     }
 
-    public void updateMatchHistory(List<MatchDetails> history) {
-        ObservableList<MatchDetails> historyList = FXCollections.observableArrayList(history);
-        historyTable.setItems(historyList);
+    public void updateMatchHistory(List<MatchDetail> history) {
+        ObservableList<MatchDetail> historyList = FXCollections.observableArrayList(history);
+        historyTable2.setItems(historyList);
     }
 }

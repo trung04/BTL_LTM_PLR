@@ -1,7 +1,7 @@
 package server;
 
 import common.Match;
-import common.MatchDetails;
+import common.MatchDetail;
 import common.Message;
 import common.User;
 
@@ -19,7 +19,6 @@ public class ClientHandler implements Runnable {
     private ObjectInputStream in;
     private ObjectOutputStream out;
     private User user;
-    private GameRoom gameRoom;
     private Game game;
     private volatile boolean isRunning = true;
 
@@ -105,15 +104,7 @@ public class ClientHandler implements Runnable {
             case "finish_game":
                 finishGame(message);
                 break;
-            case "shoot":
-                handleShoot(message);
-                break;
-            case "goalkeeper":
-                handleGoalkeeper(message);
-                break;
-            case "play_again_response":
-                handlePlayAgainResponse(message);
-                break;
+
             case "get_leaderboard":
                 handleGetLeaderboard();
                 break;
@@ -129,24 +120,12 @@ public class ClientHandler implements Runnable {
             case "get_match_details":
                 handleGetMatchDetails(message);
                 break;
-            case "timeout":
-                handleHandleTimeout(message);
-                break;
+
             case "return_to_main":
                 // Không cần xử lý gì thêm ở server side cho thông báo này
                 break;
             // Các loại message khác
             // ...
-        }
-    }
-
-    private void handleHandleTimeout(Message message) throws IOException, SQLException {
-        if (gameRoom != null) {
-            if (message.getContent().equals("shooter")) {
-                gameRoom.startShooterTimeout();
-            } else if (message.getContent().equals("goalkeeper")) {
-                gameRoom.startGoalkeeperTimeout();
-            }
         }
     }
 
@@ -166,7 +145,10 @@ public class ClientHandler implements Runnable {
 
     private void handleGetMatchDetails(Message message) throws IOException, SQLException {
         int matchId = (int) message.getContent();
-        List<MatchDetails> details = dbManager.getMatchDetails(matchId);
+        List<MatchDetail> details = dbManager.getMatchDetail(matchId);
+        for (MatchDetail a : details) {
+            System.out.println(a.getName());
+        }
         sendMessage(new Message("match_details", details));
     }
 
@@ -176,30 +158,20 @@ public class ClientHandler implements Runnable {
     }
 
     private void handleQuitGame() throws IOException, SQLException {
-        if (gameRoom != null) {
-            gameRoom.handlePlayerQuit(this);
-        }
-        if(game != null){
+
+        if (game != null) {
             game.handlePlayerQuit(this);
         }
     }
-   
 
     private void handleGetMatchHistory() throws IOException, SQLException {
-        List<MatchDetails> history = dbManager.getUserMatchHistory(user.getId());
+        List<MatchDetail> history = dbManager.getUserMatchHistory(user.getId());
         sendMessage(new Message("match_history", history));
     }
 
     private void handleGetLeaderboard() throws IOException, SQLException {
         List<User> leaderboard = dbManager.getLeaderboard();
         sendMessage(new Message("leaderboard", leaderboard));
-    }
-
-    private void handlePlayAgainResponse(Message message) throws SQLException, IOException {
-        boolean playAgain = (boolean) message.getContent();
-        if (gameRoom != null) {
-            gameRoom.handlePlayAgainResponse(playAgain, this);
-        }
     }
 
     private void handleLogin(Message message) throws IOException, SQLException {
@@ -296,20 +268,6 @@ public class ClientHandler implements Runnable {
     private void handleChat(Message message) {
         // Gửi lại tin nhắn tới tất cả client
         server.broadcast(new Message("chat", user.getUsername() + ": " + message.getContent()));
-    }
-
-    private void handleShoot(Message message) throws SQLException, IOException {
-        if (gameRoom != null) {
-            String shooterDir = (String) message.getContent();
-            gameRoom.handleShot(shooterDir, this);
-        }
-    }
-
-    private void handleGoalkeeper(Message message) throws SQLException, IOException {
-        if (gameRoom != null) {
-            String goalkeeperDir = (String) message.getContent();
-            gameRoom.handleGoalkeeper(goalkeeperDir, this);
-        }
     }
 
     public void sendMessage(Message message) {

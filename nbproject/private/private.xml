@@ -3,18 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/LTM/BTL_LTM_PLR/src/server/Server.java</file>
             <file>file:/D:/LTM/BTL_LTM_PLR/src/client/ClientApp.java</file>
-            <file>file:/D:/LTM/BTL_LTM_PLR/src/resources/GUI/style.css</file>
-            <file>file:/D:/LTM/BTL_LTM_PLR/src/resources/GUI/LoginUI.fxml</file>
-            <file>file:/D:/LTM/BTL_LTM_PLR/src/resources/GUI/ResultMatch.fxml</file>
-            <file>file:/D:/LTM/BTL_LTM_PLR/src/server/GameRoom.java</file>
-            <file>file:/D:/LTM/BTL_LTM_PLR/src/server/DatabaseManager.java</file>
-            <file>file:/D:/LTM/BTL_LTM_PLR/src/server/Game.java</file>
-            <file>file:/D:/LTM/BTL_LTM_PLR/src/resources/GUI/GameUI.fxml</file>
             <file>file:/D:/LTM/BTL_LTM_PLR/src/client/Client.java</file>
+            <file>file:/D:/LTM/BTL_LTM_PLR/src/server/DatabaseManager.java</file>
+            <file>file:/D:/LTM/BTL_LTM_PLR/src/common/MatchDetail.java</file>
+            <file>file:/D:/LTM/BTL_LTM_PLR/src/server/Server.java</file>
+            <file>file:/D:/LTM/BTL_LTM_PLR/src/client/GUI/MainController.java</file>
+            <file>file:/D:/LTM/BTL_LTM_PLR/src/resources/GUI/MainUI.fxml</file>
+            <file>file:/D:/LTM/BTL_LTM_PLR/src/client/GUI/GameUIController.java</file>
             <file>file:/D:/LTM/BTL_LTM_PLR/src/client/TestApp.java</file>
-            <file>file:/D:/LTM/BTL_LTM_PLR/src/btl_plr/BTL_PLR.java</file>
+            <file>file:/D:/LTM/BTL_LTM_PLR/src/server/ClientHandler.java</file>
+            <file>file:/D:/LTM/BTL_LTM_PLR/src/server/GameRoom.java</file>
+            <file>file:/D:/LTM/BTL_LTM_PLR/src/server/Game.java</file>
+            <file>file:/D:/LTM/BTL_LTM_PLR/src/common/TrashItem.java</file>
+            <file>file:/D:/LTM/BTL_LTM_PLR/src/common/TrashBin.java</file>
+            <file>file:/D:/LTM/BTL_LTM_PLR/src/common/Match.java</file>
         </group>
     </open-files>
 </project-private>

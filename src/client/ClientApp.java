@@ -26,7 +26,7 @@ public class ClientApp extends Application {
 
             // Thêm event handler cho việc đóng ứng dụng
             primaryStage.setOnCloseRequest(event -> {
-                try {
+                try {   
                     if (client.getUser() != null) {
                         // Gửi yêu cầu đăng xuất trước khi đóng
                         Message logoutMessage = new Message("logout", client.getUser().getId());

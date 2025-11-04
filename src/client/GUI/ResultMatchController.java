@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.media.AudioClip;
 
 /**
  * FXML Controller class
@@ -33,6 +34,8 @@ public class ResultMatchController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+         AudioClip finishGameAudio = new AudioClip(getClass().getResource("/sound/finished.wav").toExternalForm());
+         finishGameAudio.play();
         // TODO
 //        String[] word = resultMatch.trim().split("\\s+");
 //        result.setText(String.valueOf(word[0]));

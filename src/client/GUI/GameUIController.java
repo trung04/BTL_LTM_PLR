@@ -50,6 +50,9 @@ import javafx.scene.image.Image;
 import static javafx.scene.input.KeyCode.DIGIT1;
 import static javafx.scene.input.KeyCode.DIGIT2;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class GameUIController implements Initializable {
 
@@ -61,7 +64,7 @@ public class GameUIController implements Initializable {
     @FXML
     private Label scoreLabel;
     @FXML
-    private VBox  scoreBox;
+    private VBox scoreBox;
     @FXML
     private Button btnStart;
     @FXML
@@ -87,16 +90,38 @@ public class GameUIController implements Initializable {
             new TrashBin("paper", "@../../assets/paper_bin.png", 490, 366)
     );
     private final List<TrashItem> trashList = List.of(
-            new TrashItem("Vỏ chuối", "compost", "@../../assets/banana.png"),
-            new TrashItem("Túi nilon", "plastic", "@../../assets/nilon.png"),
-            new TrashItem("Lon bia", "metal", "@../../assets/can.png"),
-            new TrashItem("Vỏ chai nước", "plastic", "@../../assets/bottle.png"),
-            new TrashItem("Đinh", "metal", "@../../assets/nail.png")
+            new TrashItem(1, "Vỏ chuối", "compost", "@../../assets/banana.png"),
+            new TrashItem(2, "Túi nilon", "plastic", "@../../assets/nilon.png"),
+            new TrashItem(3, "Lon bia", "metal", "@../../assets/can.png"),
+            new TrashItem(4, "Vỏ chai nước", "plastic", "@../../assets/bottle.png"),
+            new TrashItem(5, "Đinh", "metal", "@../../assets/nail.png")
     );
+    private MediaPlayer bgm;
+// 🛑 Gọi hàm này khi thoát giao diện
+    //Ngững phát nhạc
+
+    public void stopBackgroundMusic() {
+        if (bgm != null) {
+            bgm.stop();       // dừng phát
+            bgm.dispose();    // giải phóng tài nguyên
+            bgm = null;
+        }
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Tạo các thùng rác từ danh sách TrashBin
+        new Thread(() -> {
+            try {
+                Media media = new Media(getClass().getResource("/sound/game.mp3").toExternalForm());
+                bgm = new MediaPlayer(media);
+                bgm.setVolume(0.4);
+                bgm.setCycleCount(MediaPlayer.INDEFINITE);
+                bgm.play();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
         for (TrashBin bin : bins) {
             ImageView binImage = new ImageView(new Image(bin.getImageUrl()));
             binImage.setFitWidth(111);
@@ -248,6 +273,7 @@ public class GameUIController implements Initializable {
         if (item.getType().equalsIgnoreCase(type)) {
             item.setStatus("classified");
             item.setUserId(client.getUser().getId());
+
             System.out.println("Đúng loại! +10 điểm");
             try {
                 client.sendMessage(new Message("update_point", item));
@@ -260,6 +286,9 @@ public class GameUIController implements Initializable {
             glow.setRadius(25);
             glow.setSpread(0.6);
             selectedTrash.setEffect(glow);
+            //thêm âm thanh báo đúng
+            AudioClip correctSound = new AudioClip(getClass().getResource("/sound/correct.wav").toExternalForm());
+            correctSound.play();
             // Rác biến mất sau khi xử lý (đúng loại)
             FadeTransition fade = new FadeTransition(Duration.millis(300), selectedTrash);
             fade.setToValue(0);
@@ -275,12 +304,17 @@ public class GameUIController implements Initializable {
             wrongGlow.setRadius(30);
             wrongGlow.setSpread(0.8);
             selectedTrash.setEffect(wrongGlow);
+            //thêm âm thanh báo sai
+            AudioClip wrongSound = new AudioClip(getClass().getResource("/sound/error.wav").toExternalForm());
+
+            wrongSound.play();
             // Có thể thêm hiệu ứng “rung” nhẹ để báo sai
             TranslateTransition shake = new TranslateTransition(Duration.millis(80), selectedTrash);
             shake.setByX(10);
             shake.setCycleCount(4);
             shake.setAutoReverse(true);
             shake.play();
+
         }
 
     }
@@ -322,7 +356,7 @@ public class GameUIController implements Initializable {
             String[] scores = m.trim().split("\\s+");
             myScore.setText("YOU : " + scores[0]);
             opponentScore.setText("OPPONENT : " + scores[1]);
-         
+
         });
 
     }

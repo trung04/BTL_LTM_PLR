@@ -22,14 +22,31 @@ public class TrashItem implements Serializable {
     //người chơi nào đã phân loại
     private int userId;
 
-    public TrashItem(String name, String type, String imageUrl) {
+    public TrashItem(int id,String name, String type, String imageUrl) {
+        this.id=id;
         this.name = name;
         this.type = type;
         this.imageUrl = imageUrl;
     }
 
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getName() {

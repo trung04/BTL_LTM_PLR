@@ -45,17 +45,18 @@
                             <columns>
                                 <TableColumn text="Mã Trận" fx:id="matchIdColumn" prefWidth="80"/>
                                 <TableColumn text="Đối Thủ" fx:id="opponentColumn" prefWidth="150"/>
+                                  <TableColumn text="Điểm Số" fx:id="scoreMatchColumn" prefWidth="150"/>
                                 <TableColumn text="Kết Quả" fx:id="matchResultColumn" prefWidth="80"/>
                                 <TableColumn text="Thời Gian" fx:id="matchTimeColumn" prefWidth="150"/>
                             </columns>
                         </TableView>
-                        <TableView fx:id="historyTable">
+                        <TableView fx:id="historyTable2">
                             <columns>
-                                <TableColumn text="Lượt" fx:id="roundColumn" prefWidth="80"/>
-                                <TableColumn text="Thời Gian" fx:id="timeColumn" prefWidth="150"/>
-                                <TableColumn text="Vai Trò" fx:id="roleColumn" prefWidth="100"/>
-                                <TableColumn text="Hướng" fx:id="directionColumn" prefWidth="100"/>
-                                <TableColumn text="Kết Quả" fx:id="historyResultColumn" prefWidth="80"/>
+                                <TableColumn text="id" fx:id="idColumn" prefWidth="80"/>
+                                <TableColumn text="Rác" fx:id="nameTrashColumn" prefWidth="150"/>
+                                <TableColumn text="Loại" fx:id="typeTrashColumn" prefWidth="100"/>
+                                <TableColumn text="Kết quả" fx:id="resultColumn" prefWidth="100"/>
+                                <TableColumn text="Thời gian" fx:id="timeTrashColumn" prefWidth="80"/>
                             </columns>
                         </TableView>
                     </SplitPane>

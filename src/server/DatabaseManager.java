@@ -3,7 +3,8 @@ package server;
 import common.Match;
 import common.User;
 import common.MatchDetails;
-
+import common.TrashItem;
+import common.MatchDetail;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -106,21 +107,6 @@ public class DatabaseManager {
         stmt.executeUpdate();
     }
 
-    // Phương thức lưu chi tiết trận đấu
-    public void saveMatchDetails(int matchId, int round, int shooterId, int goalkeeperId, String shooterDirection,
-            String goalkeeperDirection, String result) throws SQLException {
-        String query = "INSERT INTO match_details (match_id, round, shooter_id, goalkeeper_id, shooter_direction, goalkeeper_direction, result) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        PreparedStatement stmt = conn.prepareStatement(query);
-        stmt.setInt(1, matchId);
-        stmt.setInt(2, round);
-        stmt.setInt(3, shooterId);
-        stmt.setInt(4, goalkeeperId);
-        stmt.setString(5, shooterDirection);
-        stmt.setString(6, goalkeeperDirection);
-        stmt.setString(7, result);
-        stmt.executeUpdate();
-    }
-
     //Phương thức lưu chi tiết trận đấu phân loại rác
     // Lấy lịch sử đấu theo match ID
     public List<MatchDetails> getMatchDetails(int matchId) throws SQLException {
@@ -171,6 +157,43 @@ public class DatabaseManager {
         return detailsList;
     }
 
+    public List<MatchDetail> getMatchDetail(int matchId) throws SQLException {
+        List<MatchDetail> detailsList = new ArrayList<>();
+        try {
+            String query = """
+        SELECT 
+            m.id as id,
+            m.match_id as matchId,
+            t.name as name,
+            t.type as type,
+            m.result as result,
+            m.created_at as time
+        FROM math_detail_test AS m
+        INNER JOIN trash_items AS t
+            ON m.trash_item_id = t.id
+        WHERE m.match_id = ?;
+        """;
+
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, matchId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                detailsList.add(new MatchDetail(
+                        rs.getInt("id"),
+                        rs.getInt("matchId"),
+                        rs.getString("name"),
+                        rs.getString("type"),
+                        rs.getString("result"),
+                        rs.getTimestamp("time")));
+            }
+
+        } catch (Exception e) {
+            System.out.println("Lỗi try vấn sql");
+        }
+
+        return detailsList;
+    }
+
     // Các phương thức khác như lấy lịch sử đấu, bảng xếp hạng, v.v.
     public List<User> getLeaderboard() throws SQLException {
         List<User> users = new ArrayList<>();
@@ -188,28 +211,39 @@ public class DatabaseManager {
     }
 
     // Lấy lịch sử đấu chi tiết theo UserID
-    public List<MatchDetails> getUserMatchHistory(int userId) throws SQLException {
-        List<MatchDetails> history = new ArrayList<>();
-        String query = "SELECT md.*, md.timestamp AS time FROM match_details md "
-                + "JOIN matches m ON md.match_id = m.id "
-                + "WHERE m.player1_id = ? OR m.player2_id = ? ORDER BY md.match_id DESC, md.round ASC";
-        PreparedStatement stmt = conn.prepareStatement(query);
-        stmt.setInt(1, userId);
-        stmt.setInt(2, userId);
-        ResultSet rs = stmt.executeQuery();
-        while (rs.next()) {
-            history.add(new MatchDetails(
-                    rs.getInt("id"),
-                    rs.getInt("match_id"),
-                    rs.getInt("round"),
-                    rs.getInt("shooter_id"),
-                    rs.getInt("goalkeeper_id"),
-                    rs.getString("shooter_direction"),
-                    rs.getString("goalkeeper_direction"),
-                    rs.getString("result"),
-                    rs.getTimestamp("time") // Lấy cột timestamp
-            ));
+    public List<MatchDetail> getUserMatchHistory(int userId) throws SQLException {
+        List<MatchDetail> history = new ArrayList<>();
+        try {
+            String query = """
+        SELECT 
+            m.id as id,
+            m.match_id as matchId,
+            t.name as name,
+            t.type as type,
+            m.result as result,
+            m.created_at as time
+        FROM math_detail_test AS m
+        INNER JOIN trash_items AS t
+            ON m.trash_item_id = t.id
+        WHERE m.user_id = ?;
+        """;
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                history.add(new MatchDetail(
+                        rs.getInt("id"),
+                        rs.getInt("matchId"),
+                        rs.getString("name"),
+                        rs.getString("type"),
+                        rs.getString("result"),
+                        rs.getTimestamp("time")));
+            }
+
+        } catch (Exception e) {
+            System.out.println("Lỗi truy vấn lấy chi tiết trận đấu theo userId");
         }
+
         return history;
     }
 
@@ -229,6 +263,8 @@ public class DatabaseManager {
                     rs.getInt("id"),
                     rs.getInt("player1_id"),
                     rs.getInt("player2_id"),
+                    rs.getInt("player1_score"),
+                    rs.getInt("player2_score"),
                     rs.getObject("winner_id") != null ? rs.getInt("winner_id") : null,
                     rs.getString("player1_name"),
                     rs.getString("player2_name"),
@@ -255,6 +291,18 @@ public class DatabaseManager {
             System.err.println("SQL Error: " + ex.getMessage());
             return -1;
         }
+    }
+
+    //lay chi ds rac thai
+    public List<TrashItem> getTrashItems() throws SQLException {
+        List<TrashItem> trash_items = new ArrayList<>();
+        String query = "select * from trash_items";
+        PreparedStatement stmt = conn.prepareStatement(query);
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            trash_items.add(new TrashItem(rs.getInt("id"), rs.getString("name"), rs.getString("type"), rs.getString("image_url")));
+        }
+        return trash_items;
     }
 
 }
