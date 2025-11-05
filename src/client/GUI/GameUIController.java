@@ -71,7 +71,7 @@ public class GameUIController implements Initializable {
     private Button btnExit;
     @FXML
     private Label clockLabel;
-    private int timeLeft = 20; // 15 giây
+    private int timeLeft = 30; // 15 giây
 
     @FXML
     private Label opponentScore;
@@ -181,7 +181,7 @@ public class GameUIController implements Initializable {
             //xử lý phân loại rác
             sortTrash(rac);
             //thả rơi rác  
-            TranslateTransition fall = new TranslateTransition(Duration.seconds(4 + random.nextDouble() * 2), rac);
+            TranslateTransition fall = new TranslateTransition(Duration.seconds(10 + random.nextDouble() * 2), rac);
             fall.setFromY(0);
             fall.setToY(420);
             // Khi rác rơi xong mà chưa được thả → tính là MISS

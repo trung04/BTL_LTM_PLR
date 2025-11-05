@@ -23,6 +23,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.URL;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Client {
 
@@ -120,9 +121,12 @@ public class Client {
                 break;
             case "user_list":
                 List<User> users = (List<User>) message.getContent();
+                List<User> users2 = users.stream()
+                        .filter(u -> !u.getUsername().equals(user.getUsername()))
+                        .collect(Collectors.toList());
                 Platform.runLater(() -> {
                     if (mainController != null) {
-                        mainController.updateUsersList(users);
+                        mainController.updateUsersList(users2);
                     }
                 });
                 break;
@@ -307,6 +311,7 @@ public class Client {
             primaryStage.setMinWidth(400);
             primaryStage.setMinHeight(300);
             primaryStage.show();
+
             sendMessage(new Message("get_users", null));
         } catch (IOException e) {
             e.printStackTrace();

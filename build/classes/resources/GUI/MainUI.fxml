@@ -1,15 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="client.GUI.MainController">
+<BorderPane style="-fx-background-color: #a8dadc;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.GUI.MainController">
     <top>
         <MenuBar>
             <Menu text="Menu">
-                <MenuItem text="Đăng xuất" onAction="#handleLogout"/>
+                <MenuItem onAction="#handleLogout" text="Đăng xuất" />
             </Menu>
         </MenuBar>
     </top>
@@ -18,18 +29,19 @@
             <Tab text="Danh Sách Người Chơi">
                 <VBox spacing="10">
                     <padding>
-                        <Insets top="10" right="10" bottom="10" left="10"/>
+                        <Insets bottom="10" left="10" right="10" top="10" />
                     </padding>
                     <HBox spacing="10">
-                        <TextField fx:id="searchField" promptText="Tìm kiếm theo tên"/>
-                        <Button text="Lọc Online" onAction="#handleFilterOnline"/>
-                        <Button text="Tìm" onAction="#handleSearch"/>
+                        <TextField fx:id="searchField" promptText="Tìm kiếm theo tên" />
+                        <Button onAction="#handleFilterOnline" text="Lọc Online" />
+                        <Button onAction="#handleSearch" text="Tìm" />
+                  <Label fx:id="userLabel" text="Label"  styleClass="user-badge"/>
                     </HBox>
                     <TableView fx:id="usersTable">
                         <columns>
-                            <TableColumn text="Tên" fx:id="nameColumn" prefWidth="150"/>
-                            <TableColumn text="Điểm" fx:id="pointsColumn" prefWidth="100"/>
-                            <TableColumn text="Trạng Thái" fx:id="statusColumn" prefWidth="100"/>
+                            <TableColumn fx:id="nameColumn" prefWidth="150" text="Tên" />
+                            <TableColumn fx:id="pointsColumn" prefWidth="100" text="Điểm" />
+                            <TableColumn fx:id="statusColumn" prefWidth="100" text="Trạng Thái" />
                         </columns>
                     </TableView>
                 </VBox>
@@ -37,26 +49,26 @@
             <Tab text="Lịch Sử Đấu">
                 <VBox spacing="10">
                     <padding>
-                        <Insets top="10" right="10" bottom="10" left="10"/>
+                        <Insets bottom="10" left="10" right="10" top="10" />
                     </padding>
                     <!-- Sử dụng SplitPane để chia không gian giữa hai bảng -->
-                    <SplitPane orientation="VERTICAL">
+                    <SplitPane dividerPositions="0.5" orientation="VERTICAL">
                         <TableView fx:id="matchesTable">
                             <columns>
-                                <TableColumn text="Mã Trận" fx:id="matchIdColumn" prefWidth="80"/>
-                                <TableColumn text="Đối Thủ" fx:id="opponentColumn" prefWidth="150"/>
-                                  <TableColumn text="Điểm Số" fx:id="scoreMatchColumn" prefWidth="150"/>
-                                <TableColumn text="Kết Quả" fx:id="matchResultColumn" prefWidth="80"/>
-                                <TableColumn text="Thời Gian" fx:id="matchTimeColumn" prefWidth="150"/>
+                                <TableColumn fx:id="matchIdColumn" prefWidth="80" text="Mã Trận" />
+                                <TableColumn fx:id="opponentColumn" prefWidth="150" text="Đối Thủ" />
+                                <TableColumn fx:id="scoreMatchColumn" prefWidth="150" text="Điểm Số" />
+                                <TableColumn fx:id="matchResultColumn" prefWidth="80" text="Kết Quả" />
+                                <TableColumn fx:id="matchTimeColumn" prefWidth="150" text="Thời Gian" />
                             </columns>
                         </TableView>
                         <TableView fx:id="historyTable2">
                             <columns>
-                                <TableColumn text="id" fx:id="idColumn" prefWidth="80"/>
-                                <TableColumn text="Rác" fx:id="nameTrashColumn" prefWidth="150"/>
-                                <TableColumn text="Loại" fx:id="typeTrashColumn" prefWidth="100"/>
-                                <TableColumn text="Kết quả" fx:id="resultColumn" prefWidth="100"/>
-                                <TableColumn text="Thời gian" fx:id="timeTrashColumn" prefWidth="80"/>
+                                <TableColumn fx:id="idColumn" prefWidth="80" text="id" />
+                                <TableColumn fx:id="nameTrashColumn" prefWidth="150" text="Rác" />
+                                <TableColumn fx:id="typeTrashColumn" prefWidth="100" text="Loại" />
+                                <TableColumn fx:id="resultColumn" prefWidth="100" text="Kết quả" />
+                                <TableColumn fx:id="timeTrashColumn" prefWidth="80" text="Thời gian" />
                             </columns>
                         </TableView>
                     </SplitPane>
@@ -65,12 +77,12 @@
             <Tab text="Bảng Xếp Hạng">
                 <VBox spacing="10">
                     <padding>
-                        <Insets top="10" right="10" bottom="10" left="10"/>
+                        <Insets bottom="10" left="10" right="10" top="10" />
                     </padding>
                     <TableView fx:id="leaderboardTable">
                         <columns>
-                            <TableColumn text="Tên" fx:id="lbNameColumn" prefWidth="150"/>
-                            <TableColumn text="Điểm" fx:id="lbPointsColumn" prefWidth="100"/>
+                            <TableColumn fx:id="lbNameColumn" prefWidth="150" text="Tên" />
+                            <TableColumn fx:id="lbPointsColumn" prefWidth="100" text="Điểm" />
                         </columns>
                     </TableView>
                 </VBox>

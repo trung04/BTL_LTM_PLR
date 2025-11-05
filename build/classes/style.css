@@ -2,7 +2,18 @@
 .root {
     -fx-font-family: "Arial";
 }
+.user-badge {
+    -fx-font-family: "Segoe UI", "Poppins", sans-serif;
+    -fx-font-size: 16px;
+    -fx-font-weight: 700;
+    -fx-text-fill: white;
 
+    -fx-background-color: linear-gradient(to right, #00b09b, #96c93d);
+    -fx-background-radius: 999;      /* bo tròn dạng pills */
+    -fx-padding: 8 14;
+
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0.2, 0, 3);
+}
 /*#clockLabel {
     -fx-font-family: 'Orbitron';
     -fx-font-size: 20px;
@@ -69,7 +80,7 @@
 
 /* Giao diện kết quả  */
 #score, #result {
-   
+
     -fx-font-family: 'Comic Sans MS', 'Arial Black', sans-serif;
     -fx-font-weight: bold;
     -fx-font-size: 32px;
@@ -78,7 +89,7 @@
     -fx-stroke: #4d2e00;
     -fx-stroke-width: 2;
     -fx-translate-y: 2;
-     -fx-alignment: center;
+    -fx-alignment: center;
     -fx-text-alignment: center;
 }
 

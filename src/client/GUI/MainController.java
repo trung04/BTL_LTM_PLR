@@ -47,6 +47,9 @@ public class MainController {
     @FXML
     private Label statusLabel;
 
+    @FXML
+    private Label userLabel;
+
     private Client client;
     private ObservableList<User> usersList = FXCollections.observableArrayList();
 
@@ -86,6 +89,7 @@ public class MainController {
         loadUsers();
         loadLeaderboard();
         loadUserMatches(); // Tải danh sách trận đấu
+        userLabel.setText("Xin chào " + client.getUser().getUsername() + "!");
     }
 
     private void loadUserMatches() throws IOException {
@@ -203,6 +207,7 @@ public class MainController {
     private MediaPlayer bgm;
 // 🛑 Gọi hàm này khi thoát giao diện
     //Ngững phát nhạc
+
     public void stopBackgroundMusic() {
         if (bgm != null) {
             bgm.stop();       // dừng phát
